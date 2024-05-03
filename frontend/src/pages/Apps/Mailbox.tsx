@@ -9,82 +9,82 @@ const Mailbox = () => {
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      What type of cases can be filed on this platform?
+                      What is the purpose of this web application?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">Cases types, including civil, criminal, or specific legal matters can be filed.</p>
+                  <p className="text-gray-500 dark:text-gray-400">The purpose of this web application is to provide a platform for reporting cybercrimes, tracking cases, and providing assistance and resources related to cybercrime prevention and investigation.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      How can I directly file a case on this platform?
+                      How can I report a cybercrime?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">This platform assists you to file a case directly. You must first register as a litigant and then enter all relevant information about your case. An e-filed produced for your case will be maintained as a record.</p>
+                  <p className="text-gray-500 dark:text-gray-400">You can report a cybercrime by filling out a report form on our website. Provide details about the incident, including what happened, when it occurred, and any relevant information.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Do I need to know the sections under IPC for the same?
+                      What happens after I submit a report?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">Yes. You need to submit Fact details, Case details, Act details specifying the particular sections under IPC that have been violated.</p>
+                  <p className="text-gray-500 dark:text-gray-400">After you submit a report, our system assigns the case to the concerned intern for investigation. You will receive updates on the status of your case via email or through the website.</p>
                   <p className="text-gray-500 dark:text-gray-400">Feel free to <a href="#" className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline" target="_blank" rel="noreferrer">contact us</a> and we'll help you out as soon as we can.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Do I have to pay in order to file my case?
+                      Can I track the progress of my case?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">No. You have to pay absolutely nothing for filing your case on this platform.</p>
+                  <p className="text-gray-500 dark:text-gray-400">Yes, you can track the progress of your case by logging into your account on our website. You will be able to see the current status of your case and any updates from the intern assigned to your case.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Can I access previously filed cases or case history on this platform?
+                      How long does it take to resolve a cybercrime case?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">Yes. You are allowed to access your case history for reference.</p>
+                  <p className="text-gray-500 dark:text-gray-400">The time to resolve a cybercrime case varies depending on the complexity of the incident and the resources available. Our team works diligently to investigate and resolve cases as quickly as possible while ensuring thoroughness and accuracy.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Can I access this platform for any kind of legal advice from lawyer?
+                      Do you provide support for victims of cybercrimes?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">No. This platform is solely for the purpose of Case registration and its Flow management. Cuurently, there exists no feature for legal advice.</p>
+                  <p className="text-gray-500 dark:text-gray-400">Yes, we provide support for victims of cybercrimes. Our website offers resources and information to help victims understand their rights, report incidents, and seek assistance from law enforcement agencies and support organizations.</p>
               </div>
           </div>
           <div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Is there any limit on number of cases to be filed?
+                      What is the role of the chatbot on the website?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">No, there is no limit. You can file multiple cases on this platform.</p>
+                  <p className="text-gray-500 dark:text-gray-400">The chatbot provides automated assistance and information related to different categories of cybercrimes. It can answer common questions, provide guidance on reporting incidents, and offer resources for prevention and protection.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Can I modify/add extra information to the case filed by me?
+                      CAre there case studies available on the website?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">Yes. You can modify the case details as well as add more information.</p>
+                  <p className="text-gray-500 dark:text-gray-400">Yes, we provide case studies and investigative methods for both layman and law enforcement professionals. These resources offer insights into real-world cybercrime incidents, investigation techniques, and best practices for prevention and response.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      Will there be any any penalty if I wish to withdraw my filed case?
+                      How can I stay updated on the latest cybercrime trends and news?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">No. You can withdraw your case without facing any penalty or charges.</p>
+                  <p className="text-gray-500 dark:text-gray-400">You can subscribe to our newsletter or follow our blog for updates on the latest cybercrime trends, news, and tips for staying safe online. We regularly publish articles and resources to help raise awareness and educate the public about cybersecurity issues.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      How do I know the status of my case?
+                      Is my personal information secure when I use this website?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">Once registered, you will receive a Case ID for your filed case. Using this case ID you can track the status of your case.</p>
+                  <p className="text-gray-500 dark:text-gray-400">OYes, we take the security and privacy of your personal information seriously. Our website employs industry-standard security measures to protect your data and ensure confidentiality. We do not share your information with third parties without your consent.</p>
               </div>
               <div className="mb-10">
                   <h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
                       <svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
-                      How will know if my case is scheduled?
+                      How can I contribute to the fight against cybercrime?
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400">You will receive an alert/notification from the portal when your case will get scheduled.</p>
+                  <p className="text-gray-500 dark:text-gray-400">You can contribute to the fight against cybercrime by staying informed about cybersecurity best practices and reporting any suspicious activity or incidents you encounter online. Additionally, you can share educational resources from our website with your friends, family, and community to raise awareness about cyber threats and how to prevent them. Your vigilance and proactive involvement can help make the internet a safer place for everyone.</p>
               </div>
           </div>
       </div>
