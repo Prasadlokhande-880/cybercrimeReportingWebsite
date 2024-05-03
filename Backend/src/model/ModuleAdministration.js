@@ -76,6 +76,6 @@ signupSchema.pre('save', async function(next) {
     }
 });
 
-const InternSignup = mongoose.model('InternSignup', signupSchema);
+const AdminSignup = mongoose.model('AdminSignup', signupSchema);
 
-module.exports = InternSignup;
+module.exports = AdminSignup;
