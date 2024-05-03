@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import "./Chart.css"
+import React, { useState } from "react";
+import "./Chart.css";
 const ChatbotComponent: React.FC = () => {
-  const [userInput, setUserInput] = useState<string>('');
+  const [userInput, setUserInput] = useState<string>("");
   const [chatMessages, setChatMessages] = useState<string[]>([]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +13,7 @@ const ChatbotComponent: React.FC = () => {
     setChatMessages([...chatMessages, `User: ${userInput}`]);
 
     // Define the endpoint URL
-    const endpoint = 'https://ascb.onrender.com/make-model-prediction';
+    const endpoint = "https://ascb.onrender.com/make-model-prediction";
 
     // Define the content to be sent in the POST request
     const postData = {
@@ -22,44 +22,41 @@ const ChatbotComponent: React.FC = () => {
 
     // Make the POST request
     fetch(endpoint, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         // Add any additional headers if needed
       },
       body: JSON.stringify(postData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Handle the response data
         const chatbotResponse = data.predictions[0].candidates[0].content;
         setChatMessages([...chatMessages, `Chatbot: ${chatbotResponse}`]);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle errors
-        console.error('Error:', error);
-        setChatMessages([...chatMessages, 'Error occurred while making the request.']);
+        console.error("Error:", error);
+        setChatMessages([
+          ...chatMessages,
+          "Error occurred while making the request.",
+        ]);
       });
 
     // Clear the input field
-    setUserInput('');
+    setUserInput("");
   };
 
   return (
     <div>
-    <div className="chat-container">
-      {chatMessages.map((message, index) => (
-        <div key={index} className="chat-message">
-          {message}
-        </div>
-      ))} 
+      <iframe
+        src="https://www.chatbase.co/chatbot-iframe/WidGfnug8fK5nBucV8V8-"
+        title="Chatbot"
+        width="100%"
+        height={"600px"}
+      ></iframe>
     </div>
-
-    <div className="input-container">
-      <input type="text" className="chat-input" value={userInput} onChange={handleInputChange} />
-      <button className="send-button" onClick={handleSendMessage}>Send</button>
-    </div>
-  </div>
   );
 };
 

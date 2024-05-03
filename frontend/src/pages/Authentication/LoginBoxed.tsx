@@ -9,40 +9,37 @@ const LoginBoxed = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    type:"",
     subscribeNewsletter: false,
   });
 
-  const handleInputChange = (e: {
-    target: { name: any; value: any; type: any; checked: any };
-  }) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === "checkbox" ? checked : value;
+  const handleInputChange = (e:any) => {
+    const { name, value } = e.target;
 
     setFormData({
       ...formData,
-      [name]: inputValue,
+      [name]: value,
     });
   };
+
+
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     try {
-      // Make a POST request to the backend
-      const response: AxiosResponse<any> = await axiosInstance.post(
-        "/signin",
-        formData
-      );
-
-      // Handle the response as needed
-      console.log("Login successful:", response.data);
-      window.location.href = "/second";
-      // Redirect or perform additional logic after successful login
+      console.log(formData);
+      const response = await axios.post("http://localhost:4200/login", formData);
+      console.log("Data sent to the backend:", response.data);
+        window.location.href = "/second";
     } catch (error: any) {
-      // Handle errors from the backend
-      console.error("Error during login:", error);
+        // Handle errors from the backend
+        console.error("Error during login:", error);
+
+        document.getElementById("error-message").innerText = "Error: Unable to login. Please try again.";
     }
-  };
+};
+
 
   return (
     <div>
@@ -125,6 +122,25 @@ const LoginBoxed = () => {
                       <IconLockDots fill={true} />
                     </span>
                   </div>
+                </div>
+
+                <label htmlFor="Type">Type</label>
+                <div className="relative text-white-dark">
+                  <select
+                    id="Type"
+                    name="type"
+                    value={formData.type}
+                    onChange={handleInputChange}
+                    className="form-select ps-2"
+                    required
+                  >
+                    <option value="">Select Type</option>
+                    <option value="normal">Normal</option>
+                    <option value="intern">Intern</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+                <div id="error-message" className="p-0 m-2 text-red-600">
                 </div>
                 <button
                   type="submit"
