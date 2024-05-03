@@ -123,7 +123,8 @@ const Todolist3 = lazy(() => import("../pages/Apps/todolist3"));
 const routes = [
   {
     path: "/",
-    element: <Index />,
+    // element: <Index />,
+    element: <Navigate to="/auth/boxed-signin" />,
   },
   {
     path: "/todolist3",

@@ -56,10 +56,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const fetchData = async () => {
       // const userData = "Lawyer";
-      // const resp = await axiosInstance.get("/usertype");
-      // console.log("Here is the ", resp.data.userType);
-      // changeUser(resp.data.userType);
-      changeUser("Judge");
+      changeUser("Lawyer");
     };
     fetchData();
   }, []);
