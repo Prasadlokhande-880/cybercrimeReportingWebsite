@@ -11,6 +11,8 @@ import Sidebar2 from "./Sidebar2";
 import Sidebar3 from "./Sidebar3";
 import Portals from "../../components/Portals";
 import { axiosInstance } from "../../config";
+import axios from "axios";
+import { use } from "i18next";
 
 const DefaultLayout = ({ children }: PropsWithChildren) => {
   const themeConfig = useSelector((state: IRootState) => state.themeConfig);
@@ -51,13 +53,20 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
     };
   }, []);
 
-  const [user, changeUser] = useState<string>("");
+  const [user, changeUser] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      // const userData = "Lawyer";
-      changeUser("Lawyer");
+      try {
+        const response = await axios.get("http://localhost:4200/UserName");
+        const temp =await changeUser(response.data.type);
+        console.log(temp);
+
+      } catch (error) {
+        console.log("User Type Error:", error);
+      }
     };
+
     fetchData();
   }, []);
 

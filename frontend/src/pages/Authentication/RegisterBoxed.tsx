@@ -51,20 +51,15 @@ const RegisterBoxed = () => {
   // };
 
   const sendDataToBackend = async (data:any) => {
+    console.log("datasend");
+
     try {
-      // const response: AxiosResponse<any> = await axios.post("http://localhost:5000/api/signup", data,{
-      const response: AxiosResponse<any> = await axiosInstance.post(
-        "/signup",
-        {data}
-      );
+      const response = await axios.post("http://localhost:4200/api/signup", data);
       console.log("Data sent to the backend:", response.data);
-      // navigate("/")
-      // setTimeout(() => {}, 5000);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error sending data to the backend:", error);
     }
-  };
-
+};
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission behavior
     sendDataToBackend(formData);

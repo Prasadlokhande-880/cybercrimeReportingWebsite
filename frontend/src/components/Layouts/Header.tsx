@@ -35,6 +35,7 @@ import IconMenuPages from "../Icon/Menu/IconMenuPages";
 import IconMenuMore from "../Icon/Menu/IconMenuMore";
 import { Button } from "@mantine/core";
 import { axiosInstance } from "../../config";
+import axios from "axios";
 
 const Header = () => {
   const location = useLocation();
@@ -168,12 +169,6 @@ const Header = () => {
 
   // this are the function and the object for geting the data from the backend
 
-
-
-
-
-
-
   const [userData, userdatafunction] = useState({});
 
   // Function to retrieve user data from the backend
@@ -181,8 +176,8 @@ const Header = () => {
   useEffect(()=>{
     const getUserDataFromBackend = async () => {
       try {
-        const response = await axiosInstance.get("/user/details");
-        console.log(response);
+        const response = await axios.get("http://localhost:4200/UserTypes");
+        console.log("username",response);
         const userDataFromBackend = response.data;
         userdatafunction(userDataFromBackend);
       } catch (error) {
