@@ -5,15 +5,35 @@ import { setPageTitle } from "../../store/themeConfigSlice";
 import { userInfo } from "os";
 import IconUser from "../../components/Icon/IconUser";
 import { axiosInstance } from "../../config";
+import axios from "axios";
+
+interface UserProfile {
+  _id: string;
+  name: string;
+  type: string;
+  email: string;
+  password: string;
+  dateOfBirth: Date;
+  ordinaryPlaceOfWorking: string;
+  district: string;
+  state: string;
+  mobile: string;
+  aadhar: string;
+  barNumber: string;
+  pincode: string;
+  gender: string;
+  __v: number;
+}
 
 const AccountSetting = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setPageTitle("Account Setting"));
   }, [dispatch]);
 
   const [tabs, setTabs] = useState<string>("home");
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<Partial<UserProfile>>({}); // Initialize as empty object
 
   const toggleTabs = (name: string) => {
     setTabs(name);
@@ -32,22 +52,25 @@ const AccountSetting = () => {
   // Function to retrieve user data from the backend
   const getUserDataFromBackend = async () => {
     try {
-      const response = await axiosInstance.get("/me");
-      setFormData(response.data.user);
+      const response = await axios.get("http://localhost:4200/profile");
+      console.log(response.data);
+      setFormData(response.data);
+      console.log(formData);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
-  
+
   const handleSave = async () => {
     try {
-      // Assuming that formData._id is a valid property in your formData object
-      await axiosInstance.put(`/user/edit/${formData._id}`, formData);
-      console.log("Data updated successfully");
+        console.log("Updating user data:", formData);
+        await axios.put(`http://localhost:4200/update`, formData);
+        console.log("Data updated successfully");
     } catch (error) {
-      console.error("Error updating user data:", error);
+        console.error("Error updating user data:", error);
     }
-  };
+};
+
 
   useEffect(() => {
     getUserDataFromBackend();
@@ -88,7 +111,7 @@ const AccountSetting = () => {
                       type="text"
                       placeholder="Name"
                       className="form-input"
-                      value={formData.name}
+                      value={formData?.name}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -99,7 +122,7 @@ const AccountSetting = () => {
                       type="text"
                       placeholder="Name"
                       className="form-input"
-                      value={formData.ordinaryPlaceOfWorking}
+                      value={formData?.ordinaryPlaceOfWorking}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -110,7 +133,7 @@ const AccountSetting = () => {
                       type="text"
                       placeholder="Name"
                       className="form-input"
-                      value={formData.district}
+                      value={formData?.district}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -121,7 +144,7 @@ const AccountSetting = () => {
                       type="text"
                       placeholder="Name"
                       className="form-input"
-                      value={formData.state}
+                      value={formData?.state}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -133,8 +156,8 @@ const AccountSetting = () => {
                       type="text"
                       placeholder="+1 (530) 555-12121"
                       className="form-input"
-                      value={formData.mobile}
-                      onChange={handleInputChange}
+                      value={formData?.mobile}
+
                     />
                   </div>
                   <div>
@@ -144,8 +167,7 @@ const AccountSetting = () => {
                       type="email"
                       placeholder="Jimmy@gmail.com"
                       className="form-input"
-                      value={formData.email}
-                      onChange={handleInputChange}
+                      value={formData?.email}
                     />
                   </div>
                   <div className="sm:col-span-2 mt-3">
@@ -153,7 +175,7 @@ const AccountSetting = () => {
                       type="submit"
                       className="btn btn-primary"
                       onClick={handleSave}
-                     
+
                     >
                      Save
                     </button>

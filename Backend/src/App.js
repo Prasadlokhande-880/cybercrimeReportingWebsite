@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const NormalSignup = require('./model/ModuleNormalUser');
 const InternSignup = require('./model/ModuleInternUser');
 const AdminSignup = require('./model/ModuleAdministration');
+const Case = require("./model/Moduleform");
+
 const cors = require('cors');
 
 const app = express();
@@ -27,7 +29,6 @@ app.post("/api/signup", async (req, res) => {
         type=data.type
 
         console.log(data);
-        type="intern";
         // Determine the user model based on the type
         switch (type) {
             case "normal":
@@ -106,7 +107,6 @@ app.post("/login", async (req, res) => {
 
 app.get("/UserType", async (req, res) => {
     try {
-        console.log("getdata");
         res.status(200).json({ message: "success", type: UserType });
     } catch (error) {
         console.log("User Type Error:", error);
@@ -118,7 +118,6 @@ app.get("/UserType", async (req, res) => {
 // this is the code for the user email
 
 app.get("/UserName", async (req, res) => {
-    console.log("data2");
     try {
         res.status(200).json({ message: "success", name:userName});
         console.log(userName);
@@ -130,6 +129,7 @@ app.get("/UserName", async (req, res) => {
 
 
 // this is the code for the code for the profile
+
 app.get("/ProfileUser", async (req, res) => {
     try {
         const ProfileUserData = await NormalUser.findOne({ name: userNameNormal });
@@ -143,3 +143,72 @@ app.get("/ProfileUser", async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+//this is the code for the code for the E-filing
+
+app.post("/efiling", async (req, res) => {
+    try {
+       const data = req.body;
+       data.UserEmail=userName;
+
+       const newUser = new Case(data);
+       await newUser.save();
+       res.status(200).send("Data received successfully");
+    } catch (error) {
+       console.log("There is an error in efiling:", error);
+       res.status(500).send("Internal server error");
+    }
+ });
+
+ // get all the data from the backend
+
+<<<<<<< Updated upstream
+=======
+ userName="Prasad.lokhande@mitaoe.ac.in";
+
+>>>>>>> Stashed changes
+app.get("/getallefiling", async (req, res) => {
+    try {
+      const allCases = await Case.find({UserEmail:userName});
+      res.status(200).json(allCases);
+    } catch (error) {
+      console.error("Error in getAllEfiling:", error);
+      res.status(500).send("Internal server error");
+    }
+});
+
+
+// this is the for the giving the Profile information
+
+app.get("/profile", async (req, res) => {
+    try{
+        const userinformation = await NormalSignup.findOne({email:userName});
+        res.status(200).json(userinformation);
+    }
+    catch(error){
+        console.log("this is the error for the server:",error);
+    }
+})
+
+app.put("/update", async (req, res) => {
+    try {
+        const updatedUserInfo = req.body;
+        console.log("Received updated user info:", updatedUserInfo);
+        res.status(200).json({ message: "User profile updated successfully" });
+    } catch (error) {
+        console.log("Error updating user:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+// this is the code for the intern to get all the cases
+
+app.get("/getallefiling", async (req, res) => {
+    try {
+      const allCases = await Case.find({UserEmail:userName});
+      res.status(200).json(allCases);
+    } catch (error) {
+      console.error("Error in getAllEfiling:", error);
+      res.status(500).send("Internal server error");
+    }
+})

@@ -58,10 +58,9 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4200/UserName");
-        const temp =await changeUser(response.data.type);
-        console.log(temp);
-
+        const response = await axios.get("http://localhost:4200/UserType");
+        console.log("res",response.data.type);
+        changeUser(response.data.type);
       } catch (error) {
         console.log("User Type Error:", error);
       }
@@ -148,11 +147,11 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
         >
           {/* BEGIN SIDEBAR */}
           {user ? (
-            user === "Lawyer" ? (
+            user === "normal" ? (
               <Sidebar />
-            ) : user === "courtAdmin" ? (
+            ) : user === "intern" ? (
               <Sidebar2 />
-            ) : user === "Judge" ? (
+            ) : user === "admin" ? (
               <Sidebar3 />
             ) : null
           ) : null}

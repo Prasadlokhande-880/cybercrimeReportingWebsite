@@ -51,7 +51,7 @@ const ChatbotComponent: React.FC = () => {
   return (
     <div>
       <iframe
-        src="https://www.chatbase.co/chatbot-iframe/WidGfnug8fK5nBucV8V8-"
+        src="https://www.chatbase.co/chatbot-iframe/HkoxkwVEgcoTdm0V2dAlO"
         title="Chatbot"
         width="100%"
         height={"600px"}

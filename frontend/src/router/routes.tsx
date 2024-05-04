@@ -119,12 +119,16 @@ const Contact3 = lazy(() => import("../pages/Apps/contacts3"));
 const FinalForm2 = lazy(() => import("../pages/Apps/Invoice/MainForm"));
 const Profile2 = lazy(() => import("../pages/Users/profile2"));
 const Todolist3 = lazy(() => import("../pages/Apps/todolist3"));
-
+const Contact =lazy(()=>import("../pages/ContactForm"))
 const routes = [
   {
     path: "/",
     // element: <Index />,
     element: <Navigate to="/auth/boxed-signin" />,
+  },
+  {
+    path: "/Contact",
+    element: <Contact />,
   },
   {
     path: "/todolist3",

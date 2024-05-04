@@ -169,16 +169,16 @@ const Header = () => {
 
   // this are the function and the object for geting the data from the backend
 
-  const [userData, userdatafunction] = useState({});
+  const [userData, userdatafunction] = useState("");
 
   // Function to retrieve user data from the backend
 
   useEffect(()=>{
     const getUserDataFromBackend = async () => {
       try {
-        const response = await axios.get("http://localhost:4200/UserTypes");
+        const response = await axios.get("http://localhost:4200/UserName");
         console.log("username",response);
-        const userDataFromBackend = response.data;
+        const userDataFromBackend = response.data.name;
         userdatafunction(userDataFromBackend);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -312,7 +312,7 @@ const Header = () => {
                           type="button"
                           className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
                         >
-                        {userData.email}
+                        {userData}
                         </button>
                       </div>
                     </div>

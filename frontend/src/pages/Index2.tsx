@@ -437,7 +437,6 @@ const Index = () => {
                             </div>
                         </div>
                         <p className="text-lg dark:text-white-light/90">
-                          
                         </p>
                         <div className="relative">
                             <div className="bg-white dark:bg-black rounded-lg overflow-hidden">

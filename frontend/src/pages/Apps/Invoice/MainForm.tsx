@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { Fragment } from "react";
 import axios, { AxiosResponse } from "axios";
 import { axiosInstance } from "../../../config";
+import { an } from "@fullcalendar/core/internal-common";
+import state from "./places.json";
+
+function generateRandomNumber(): number {
+  return Math.floor(100000 + Math.random() * 900000); // Generates a random 6-digit number
+}
 
 const FinalForm = () => {
+  const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
+
+  // Function to generate 10 random numbers
+  useEffect(() => {
+    const numbers: number[] = [];
+    for (let i = 0; i < 10; i++) {
+      numbers.push(generateRandomNumber());
+    }
+    setRandomNumbers(numbers);
+  }, []);
+
   const [actSectArray, setActSectArray] = useState([]);
   const [selectedAct, setSelectedAct] = useState("");
   const [section, setSection] = useState("");
   const [error, setError] = useState("");
 
-  const handleActChange = (e) => {
+  const handleActChange = (e: any) => {
     setSelectedAct(e.target.value);
   };
 
-  const handleSectionChange = (e) => {
+  const handleSectionChange = (e: any) => {
     const value = e.target.value;
 
     // Validate section: only alphabets and numbers, not blank
@@ -38,7 +55,7 @@ const FinalForm = () => {
     }
   };
 
-  const handleRemoveActSection = (index) => {
+  const handleRemoveActSection = (index: any) => {
     const updatedArray = [...actSectArray];
     updatedArray.splice(index, 1);
     setActSectArray(updatedArray);
@@ -103,7 +120,24 @@ const FinalForm = () => {
   const [legalAct, setLegalAct] = useState("");
   const [legalSection, setLegalSection] = useState("");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function isValidIndianMobileNumber(number: string): boolean {
+    // Regular expression for Indian mobile numbers
+    const indianMobileNumberRegex = /^[6-9]\d{9}$/;
+
+    // Check if the number matches the regex pattern
+    return indianMobileNumberRegex.test(number);
+  }
+
+  const [getid, setid] = useState<number>();
+  const [getage, setage] = useState<number>();
+
+  const handleInputChangeage = (inputValue:any)=> {
+    if (!isNaN(inputValue) && inputValue.length <= 3) {
+       return true
+    }
+}
+
+  const handleInputChange = (e: any) => {
     const { id, value } = e.target;
     switch (id) {
       case "courtType":
@@ -138,6 +172,12 @@ const FinalForm = () => {
         break;
       case "contactNumber":
         setContactNumber(Number(value));
+        if (!isValidIndianMobileNumber(value)) {
+          setid(1);
+        }
+        else{
+          setid(10);
+        }
         break;
       case "petitionerName":
         setPetitionerName(value);
@@ -153,6 +193,13 @@ const FinalForm = () => {
         break;
       case "petitionerAge":
         setPetitionerAge(Number(value));
+        if(handleInputChangeage(Number(value))){
+          setage(1);
+        }
+        else{
+          setage(10);
+        }
+
         break;
       case "petitionerCaseDetails":
         setPetitionerCaseDetails(value);
@@ -167,7 +214,13 @@ const FinalForm = () => {
         setPetitionerOccupation(value);
         break;
       case "petitionerMobileNumber":
-        setPetitionerMobileNumber(Number(value)); // Convert to number assuming it's an input type number
+        setPetitionerMobileNumber(Number(value));
+        if (!isValidIndianMobileNumber(value)) {
+          setid(2);
+        }
+        else{
+          setid(10);
+        }
         break;
       case "petitionerPinCode":
         setPetitionerPinCode(Number(value)); // Convert to number assuming it's an input type number
@@ -186,6 +239,7 @@ const FinalForm = () => {
         break;
       case "petitionerVillage":
         setPetitionerVillage(value);
+
         break;
       case "responderName":
         setResponderName(value);
@@ -200,7 +254,13 @@ const FinalForm = () => {
         setResponderDateOfBirth(value);
         break;
       case "responderAge":
-        setResponderAge(Number(value)); // Convert to number assuming it's an input type number
+        setResponderAge(Number(value));
+        if(handleInputChangeage(Number(value))){
+          setage(2);
+        }
+        else{
+          setage(10);
+        }
         break;
       case "responderCaseDetails":
         setResponderCaseDetails(value);
@@ -216,6 +276,12 @@ const FinalForm = () => {
         break;
       case "responderMobileNumber":
         setResponderMobileNumber(Number(value)); // Convert to number assuming it's an input type number
+        if (!isValidIndianMobileNumber(value)) {
+          setid(3);
+        }
+        else{
+          setid(10);
+        }
         break;
       case "responderPinCode":
         setResponderPinCode(Number(value)); // Convert to number assuming it's an input type number
@@ -234,6 +300,7 @@ const FinalForm = () => {
         break;
       case "responderVillage":
         setResponderVillage(value);
+
         break;
       case "causeOfAction":
         setCauseOfAction(value);
@@ -275,12 +342,9 @@ const FinalForm = () => {
 
   const sendDataToBackend = async (data: any) => {
     try {
-      const response: AxiosResponse<any> = await axiosInstance.post(
-        "/addCase",
-        data
-      );
+      const response = await axios.post("http://localhost:4200/efiling", data);
       console.log("Data sent to the backend:", response.data);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error sending data to the backend:", error);
     }
   };
@@ -288,6 +352,7 @@ const FinalForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
+      UserEmail: "",
       courtType: courtType,
       isScheduled: false,
       courtID: courtID,
@@ -423,17 +488,26 @@ const FinalForm = () => {
             </div> */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="gridState">District</label>
-                      <input
+                      <label htmlFor="gridState">state</label>
+                      <select
                         id="mainDistrict"
                         name="mainDistrict"
-                        type="text"
-                        placeholder="District"
-                        className="form-input"
+                        className="form-select"
                         value={mainDistrict}
                         onChange={handleInputChange}
-                      />
+                        required
+                      >
+                        <option value="">Select state</option>
+                        {state.states.map((stateData, index) => (
+                          <option
+                            key={index}
+                            label={stateData.state}
+                            value={stateData.state}
+                          ></option>
+                        ))}
+                      </select>
                     </div>
+
                     <div>
                       <label htmlFor="establishment">Establishment</label>
                       <input
@@ -444,6 +518,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={establishment}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
@@ -456,6 +531,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={natureOfCase}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -468,21 +544,28 @@ const FinalForm = () => {
                       className="form-input"
                       value={reliefSought}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div>
                     <label htmlFor="caseType">Case Type</label>
-                    <input
+                    <select
                       id="caseType"
-                      type="text"
-                      placeholder="Case Type"
                       className="form-input"
                       value={caseType}
                       onChange={handleInputChange}
-                    />
+                      required
+                    >
+                      <option value="">Select Case Type</option>
+                      <option value="cyber crime">cyber crime</option>
+                      <option value="Civil">Civil</option>
+                      <option value="Criminal">Criminal</option>
+                      <option value="Family">Family</option>
+                    </select>
                   </div>
+
                   <div>
-                    <label htmlFor="courtID">Court ID</label>
+                    <label htmlFor="contactNumber">Court ID</label>
                     <input
                       id="courtID"
                       type="text"
@@ -490,29 +573,24 @@ const FinalForm = () => {
                       className="form-input"
                       value={courtID}
                       onChange={handleInputChange}
+                      required
+                      maxLength={2}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="plaintiff">Plaintiff</label>
-                    <input
-                      id="plaintiff"
-                      type="text"
-                      placeholder="Plaintiff"
-                      className="form-input"
-                      value={plaintiff}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+
                   <div>
                     <label htmlFor="contactNumber">Contact No.</label>
                     <input
                       id="contactNumber"
-                      type="number"
+                      type="tel"
                       placeholder="Contact No."
                       className="form-input"
                       value={contactNumber}
                       onChange={handleInputChange}
+                      maxLength={10}
+                      required
                     />
+                    {getid===1?<p>error</p>:""}
                   </div>
                 </form>
               </div>
@@ -530,6 +608,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerName}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
 
@@ -542,6 +621,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerGender}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -554,6 +634,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={petitionerRelation}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div>
@@ -564,6 +645,8 @@ const FinalForm = () => {
                       className="form-input"
                       value={petitionerDateOfBirth}
                       onChange={handleInputChange}
+                      max={new Date().toISOString().split("T")[0]}
+                      required
                     />
                   </div>
 
@@ -577,7 +660,10 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerAge}
                         onChange={handleInputChange}
+                        maxLength={3}
+                        required
                       />
+                      {getage===1? "error age <3":" "}
                     </div>
 
                     <div>
@@ -589,6 +675,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerCaseDetails}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -602,6 +689,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={petitionerEmail}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
 
@@ -614,6 +702,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={petitionerOccupation}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
 
@@ -626,20 +715,28 @@ const FinalForm = () => {
                       className="form-input"
                       value={petitionerMobileNumber}
                       onChange={handleInputChange}
+                      required
                     />
+                    {getid==2 ? <p>"error"</p> : ""}
                   </div>
-
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                     <div>
                       <label htmlFor="petitionerPinCode">Pin Code:</label>
-                      <input
+                      <select
                         id="petitionerPinCode"
-                        type="number"
                         placeholder="Pin Code"
                         className="form-input"
                         value={petitionerPinCode}
                         onChange={handleInputChange}
-                      />
+                        required
+                      >
+                        <option value="">Select</option>
+                        {randomNumbers.map((number, index) => (
+                          <option key={index} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     <div>
@@ -650,33 +747,60 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerAddress}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                     <div>
-                      <label htmlFor="petitionerState">State:</label>
-                      <input
+                      <label htmlFor="gridState">state</label>
+                      <select
                         id="petitionerState"
-                        type="text"
-                        placeholder="State"
-                        className="form-input"
+                        name="petitionerState"
+                        className="form-select"
                         value={petitionerState}
                         onChange={handleInputChange}
-                      />
+                        required
+                      >
+                        <option value="">Select state</option>
+                        {state.states.map((stateData, index) => (
+                          <option
+                            key={index}
+                            label={stateData.state}
+                            value={stateData.state}
+                          ></option>
+                        ))}
+                      </select>
                     </div>
 
                     <div>
-                      <label htmlFor="petitionerDistrict">District:</label>
-                      <input
+                      <label htmlFor="petitionerDistrict">District</label>
+                      <select
                         id="petitionerDistrict"
-                        type="text"
-                        placeholder="District"
-                        className="form-input"
+                        name="District"
+                        className="form-select"
                         value={petitionerDistrict}
                         onChange={handleInputChange}
-                      />
+                        required
+                      >
+                        <option value="">Select district</option>
+                        {state.states.map((stateData, stateIndex) => {
+                          if (stateData.state === petitionerState) {
+                            return stateData.districts.map(
+                              (district, districtIndex) => (
+                                <option
+                                  key={districtIndex}
+                                  label={district}
+                                  value={district}
+                                ></option>
+                              )
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </select>
                     </div>
                   </div>
 
@@ -690,6 +814,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerTaluka}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
 
@@ -702,6 +827,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={petitionerVillage}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -755,6 +881,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={responderDateOfBirth}
                       onChange={handleInputChange}
+                      max={new Date().toISOString().split("T")[0]}
                     />
                   </div>
 
@@ -770,6 +897,8 @@ const FinalForm = () => {
                         onChange={handleInputChange}
                       />
                     </div>
+
+                    {getage===2? "<p>error age<3</p>":  ""}
 
                     <div>
                       <label htmlFor="responderCaseDetails">Case</label>
@@ -818,19 +947,26 @@ const FinalForm = () => {
                       value={responderMobileNumber}
                       onChange={handleInputChange}
                     />
+                     {getid===3?<p>error</p>:""}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                     <div>
                       <label htmlFor="responderPinCode">Pin Code:</label>
-                      <input
-                        id="responderPinCode"
-                        type="text"
+                      <select
+                        id="petitionerPinCode"
                         placeholder="Pin Code"
                         className="form-input"
                         value={responderPinCode}
                         onChange={handleInputChange}
-                      />
+                      >
+                        <option value="">Select</option>
+                        {randomNumbers.map((number, index) => (
+                          <option key={index} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     <div>
@@ -847,27 +983,51 @@ const FinalForm = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                     <div>
-                      <label htmlFor="responderState">State:</label>
-                      <input
+                      <label htmlFor="gridState">state</label>
+                      <select
                         id="responderState"
-                        type="text"
                         placeholder="State"
                         className="form-input"
                         value={responderState}
                         onChange={handleInputChange}
-                      />
+                      >
+                        <option value="">Select state</option>
+                        {state.states.map((stateData, index) => (
+                          <option
+                            key={index}
+                            label={stateData.state}
+                            value={stateData.state}
+                          ></option>
+                        ))}
+                      </select>
                     </div>
 
                     <div>
-                      <label htmlFor="responderDistrict">District:</label>
-                      <input
+                      <label htmlFor="petitionerDistrict">District</label>
+                      <select
                         id="responderDistrict"
-                        type="text"
                         placeholder="District"
                         className="form-input"
                         value={responderDistrict}
                         onChange={handleInputChange}
-                      />
+                      >
+                        <option value="">Select district</option>
+                        {state.states.map((stateData, stateIndex) => {
+                          if (stateData.state === responderState) {
+                            return stateData.districts.map(
+                              (district, districtIndex) => (
+                                <option
+                                  key={districtIndex}
+                                  label={district}
+                                  value={district}
+                                ></option>
+                              )
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </select>
                     </div>
                   </div>
 
@@ -926,6 +1086,8 @@ const FinalForm = () => {
                         className="form-input"
                         value={causeOfActionDate}
                         onChange={handleInputChange}
+                        max={new Date().toISOString().split("T")[0]}
+                        required
                       />
                     </div>
                   </div>
@@ -939,6 +1101,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={caseDescription}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div>
@@ -953,6 +1116,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={importantInformation}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -965,6 +1129,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={prayer}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
@@ -976,21 +1141,61 @@ const FinalForm = () => {
                         className="form-input"
                         value={valuation}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="locationDistrict">District</label>
-                      <input
+                      <label htmlFor="gridState">state</label>
+                      <select
+                        id="locationState"
+                        placeholder="Enter Prayer"
+                        className="form-input"
+                        value={locationState}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select state</option>
+                        {state.states.map((stateData, index) => (
+                          <option
+                            key={index}
+                            label={stateData.state}
+                            value={stateData.state}
+                          ></option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="petitionerDistrict">District</label>
+                      <select
                         id="locationDistrict"
-                        type="text"
                         placeholder="Enter Prayer"
                         className="form-input"
                         value={locationDistrict}
                         onChange={handleInputChange}
-                      />
+                        required
+                      >
+                        <option value="">Select district</option>
+                        {state.states.map((stateData, stateIndex) => {
+                          if (stateData.state === locationState) {
+                            return stateData.districts.map(
+                              (district, districtIndex) => (
+                                <option
+                                  key={districtIndex}
+                                  label={district}
+                                  value={district}
+                                ></option>
+                              )
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </select>
                     </div>
+
                     <div>
                       <label htmlFor="locationTaluka">Taluka</label>
                       <input
@@ -1000,6 +1205,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={locationTaluka}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
@@ -1011,17 +1217,7 @@ const FinalForm = () => {
                         className="form-input"
                         value={locationVillage}
                         onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="locationState">State</label>
-                      <input
-                        id="locationState"
-                        type="text"
-                        placeholder="Enter Prayer"
-                        className="form-input"
-                        value={locationState}
-                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
@@ -1035,6 +1231,7 @@ const FinalForm = () => {
                       className="form-input"
                       value={selectedAct}
                       onChange={handleActChange}
+                      required
                     />
                   </div>
 
@@ -1047,6 +1244,7 @@ const FinalForm = () => {
                       className={`form-input ${error ? "border-red-500" : ""}`}
                       value={section}
                       onChange={handleSectionChange}
+                      required
                     />
                     {error && <p className="text-red-500">{error}</p>}
                   </div>
