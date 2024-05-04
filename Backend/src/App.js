@@ -211,8 +211,4 @@ app.get("/getallefiling", async (req, res) => {
       console.error("Error in getAllEfiling:", error);
       res.status(500).send("Internal server error");
     }
-<<<<<<< Updated upstream
-});
-=======
-});
->>>>>>> Stashed changes
+})
