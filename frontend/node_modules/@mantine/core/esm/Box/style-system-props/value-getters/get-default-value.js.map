@@ -1,0 +1,1 @@
+{"version":3,"file":"get-default-value.js","sources":["../../../../src/Box/style-system-props/value-getters/get-default-value.ts"],"sourcesContent":["export function getDefaultValue<T>(value: T) {\n  return value;\n}\n"],"names":[],"mappings":"AAAO,SAAS,eAAe,CAAC,KAAK,EAAE;AACvC,EAAE,OAAO,KAAK,CAAC;AACf;;;;"}
