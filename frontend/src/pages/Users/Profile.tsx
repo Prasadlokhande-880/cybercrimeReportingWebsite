@@ -60,14 +60,14 @@ const Profile = () => {
   const revenueChart: any = {
     series: [
       {
-        name: "Scheduled",
+        name: "Case Completed",
         data: [
           16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000,
           14000, 17000,
         ],
       },
       {
-        name: "Not Scheduled",
+        name: "Case Review",
         data: [
           16500, 17500, 16200, 17300, 16000, 19500, 16000, 17000, 16000, 19000,
           18000, 19000,
@@ -296,7 +296,7 @@ const Profile = () => {
           },
         },
       },
-      labels: ["Scheduled", "Unscheduled"],
+      labels: ["Case Completed", "Case Review"],
       states: {
         hover: {
           filter: {
@@ -432,7 +432,7 @@ const Profile = () => {
         <div className="grid xl:grid-cols-3 gap-6 mb-6">
           <div className="panel h-full xl:col-span-2">
             <div className="flex items-center justify-between dark:text-white-light mb-5">
-              <h5 className="font-semibold text-lg">Revenue</h5>
+              <h5 className="font-semibold text-lg">Line Graph</h5>
               <div className="dropdown">
                 <Dropdown
                   offset={[0, 1]}
@@ -456,7 +456,7 @@ const Profile = () => {
               </div>
             </div>
             <p className="text-lg dark:text-white-light/90">
-              Total Profit <span className="text-primary ml-2">$10,840</span>
+               <span className="text-primary ml-2"></span>
             </p>
             <div className="relative">
               <div className="bg-white dark:bg-black rounded-lg overflow-hidden">
@@ -479,7 +479,7 @@ const Profile = () => {
           <div className="panel h-full">
             <div className="flex items-center mb-5">
               <h5 className="font-semibold text-lg dark:text-white-light">
-                Sales By Category
+                Case Status
               </h5>
             </div>
             <div>
