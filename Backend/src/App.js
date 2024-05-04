@@ -162,11 +162,8 @@ app.post("/efiling", async (req, res) => {
 
  // get all the data from the backend
 
-<<<<<<< Updated upstream
-=======
- userName="Prasad.lokhande@mitaoe.ac.in";
 
->>>>>>> Stashed changes
+
 app.get("/getallefiling", async (req, res) => {
     try {
       const allCases = await Case.find({UserEmail:userName});
