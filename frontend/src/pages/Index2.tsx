@@ -35,11 +35,11 @@ const Index = () => {
     const revenueChart: any = {
         series: [
             {
-                name: 'Income',
+                name: 'Case Completed',
                 data: [16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000, 14000, 17000],
             },
             {
-                name: 'Expenses',
+                name: 'Case Pending',
                 data: [16500, 17500, 16200, 17300, 16000, 19500, 16000, 17000, 16000, 19000, 18000, 19000],
             },
         ],
@@ -247,7 +247,7 @@ const Index = () => {
                     },
                 },
             },
-            labels: ['Apparel', 'Sports', 'Others'],
+            labels: ['Case Completed', 'Case Pending', 'Case review'],
             states: {
                 hover: {
                     filter: {
@@ -415,7 +415,7 @@ const Index = () => {
                 <div className="grid xl:grid-cols-3 gap-6 mb-6">
                     <div className="panel h-full xl:col-span-2">
                         <div className="flex items-center justify-between dark:text-white-light mb-5">
-                            <h5 className="font-semibold text-lg">Reqwdfewqvenue</h5>
+                            <h5 className="font-semibold text-lg">Monthly Cases</h5>
                             <div className="dropdown">
                                 <Dropdown
                                     offset={[0, 1]}
@@ -437,7 +437,7 @@ const Index = () => {
                             </div>
                         </div>
                         <p className="text-lg dark:text-white-light/90">
-                            Total Profit <span className="text-primary ml-2">$10,840</span>
+
                         </p>
                         <div className="relative">
                             <div className="bg-white dark:bg-black rounded-lg overflow-hidden">

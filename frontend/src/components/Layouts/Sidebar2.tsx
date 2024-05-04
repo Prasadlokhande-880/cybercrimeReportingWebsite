@@ -84,7 +84,7 @@ const Sidebar = () => {
       >
         <div className="bg-white dark:bg-black h-full">
           <div className="flex justify-between items-center px-4 py-3">
-            <NavLink to="/" className="main-logo flex items-center shrink-0">
+            <NavLink to="/second" className="main-logo flex items-center shrink-0">
               <img
                 className="w-8 ml-[5px] flex-none"
                 src="/assets/images/logo.svg"

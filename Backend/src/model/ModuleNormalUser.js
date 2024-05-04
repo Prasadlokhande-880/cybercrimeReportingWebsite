@@ -3,13 +3,13 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 
 const signupSchema = new mongoose.Schema({
-  fullName: {
+  name: {
     type: String,
   },
   type: {
     type: String,
   },
-  emailAddress: {
+  email: {
     type: String,
   },
   password: {

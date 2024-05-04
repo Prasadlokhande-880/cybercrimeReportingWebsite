@@ -29,7 +29,6 @@ app.post("/api/signup", async (req, res) => {
         type=data.type
 
         console.log(data);
-        type="intern";
         // Determine the user model based on the type
         switch (type) {
             case "normal":
@@ -108,7 +107,6 @@ app.post("/login", async (req, res) => {
 
 app.get("/UserType", async (req, res) => {
     try {
-        console.log("getdata");
         res.status(200).json({ message: "success", type: UserType });
     } catch (error) {
         console.log("User Type Error:", error);
@@ -120,7 +118,6 @@ app.get("/UserType", async (req, res) => {
 // this is the code for the user email
 
 app.get("/UserName", async (req, res) => {
-    console.log("data2");
     try {
         res.status(200).json({ message: "success", name:userName});
         console.log(userName);
@@ -167,26 +164,46 @@ app.post("/efiling", async (req, res) => {
 
 app.get("/getallefiling", async (req, res) => {
     try {
-      console.log("getAllEfiling");
       const allCases = await Case.find({UserEmail:userName});
       res.status(200).json(allCases);
     } catch (error) {
       console.error("Error in getAllEfiling:", error);
       res.status(500).send("Internal server error");
     }
-  });
+});
 
 
 // this is the for the giving the Profile information
 
 app.get("/profile", async (req, res) => {
     try{
-        console.log("getProfile----");
-        const userinformation = await NormalSignup.findOne({UserEmail:userName});
-        console.log(userinformation);
-        res.status(200).json(allCases);
+        const userinformation = await NormalSignup.findOne({email:userName});
+        res.status(200).json(userinformation);
     }
     catch(error){
         console.log("this is the error for the server:",error);
     }
 })
+
+app.put("/update", async (req, res) => {
+    try {
+        const updatedUserInfo = req.body;
+        console.log("Received updated user info:", updatedUserInfo);
+        res.status(200).json({ message: "User profile updated successfully" });
+    } catch (error) {
+        console.log("Error updating user:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+// this is the code for the intern to get all the cases
+
+app.get("/getallefiling", async (req, res) => {
+    try {
+      const allCases = await Case.find({UserEmail:userName});
+      res.status(200).json(allCases);
+    } catch (error) {
+      console.error("Error in getAllEfiling:", error);
+      res.status(500).send("Internal server error");
+    }
+});

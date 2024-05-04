@@ -56,6 +56,7 @@ const RegisterBoxed = () => {
     try {
       const response = await axios.post("http://localhost:4200/api/signup", data);
       console.log("Data sent to the backend:", response.data);
+      window.location.href = "/auth/boxed-signin";
     } catch (error) {
       console.error("Error sending data to the backend:", error);
     }
@@ -133,8 +134,9 @@ const RegisterBoxed = () => {
                       required
                     >
                       <option>Choose...</option>
-                      <option>State1</option>
-                      <option>State2</option>
+                      <option>normal</option>
+                      <option>intern</option>
+                      <option>admin</option>
                     </select>
                   </div>
                   <div>

@@ -60,8 +60,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
       try {
         const response = await axios.get("http://localhost:4200/UserType");
         console.log("res",response.data.type);
-        // changeUser(response.data.type);
-        changeUser("normal")
+        changeUser(response.data.type);
       } catch (error) {
         console.log("User Type Error:", error);
       }
