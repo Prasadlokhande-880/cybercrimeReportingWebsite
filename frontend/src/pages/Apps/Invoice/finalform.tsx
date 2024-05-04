@@ -64,84 +64,11 @@ const FinalForm = () => {
   const [legalAct, setLegalAct] = useState("");
   const [legalSection, setLegalSection] = useState("");
 
-  const getbackenddata = async () => {
-    try {
-      const response: AxiosResponse<any> = await axios.get(
-        "https://localhost:5000/cases"
-      );
-      console.log("Data sent to the backend:", response.data);
-      if (response.data) {
-        setCourtType(response.data.courtType);
-        setIsScheduled(response.data.isScheduled);
-        setIsScheduled(response.data.isScheduled);
-        setCourtID(response.data.courtID);
-        setCaseDescription(response.data.caseDetails.caseDescription);
-        setMainDistrict(response.data.caseDetails.mainDistrict);
-        setEstablishment(response.data.caseDetails.establishment);
-        setNatureOfCase(response.data.caseDetails.natureOfCase);
-        setReliefSought(response.data.caseDetails.reliefSought);
-        setCaseType(response.data.caseDetails.caseType);
-        setPlaintiff(response.data.caseDetails.plaintiff);
-        setContactNumber(Number(response.data.caseDetails.contactNumber));
-        setPetitionerName(response.data.petitioner.name);
-        setPetitionerGender(response.data.petitioner.gender);
-        setPetitionerRelation(response.data.petitioner.relation);
-        setPetitionerDateOfBirth(response.data.petitioner.dateOfBirth);
-        setPetitionerAge(Number(response.data.petitioner.age));
-        setPetitionerCaseDetails(response.data.petitioner.caseDetails);
-        setPetitionerExtraName(response.data.petitioner.extraName);
-        setPetitionerEmail(response.data.petitioner.email);
-        setPetitionerOccupation(response.data.petitioner.occupation);
-        setPetitionerMobileNumber(
-          Number(response.data.petitioner.mobileNumber)
-        ); // Convert to number assuming it's an input type number
-        setPetitionerPinCode(Number(response.data.petitioner.pinCode)); // Convert to number assuming it's an input type number
-        setPetitionerAddress(response.data.petitioner.address);
-        setPetitionerState(response.data.petitioner.state);
-        setPetitionerDistrict(response.data.petitioner.district);
-        setPetitionerTaluka(response.data.petitioner.taluka);
-        setPetitionerVillage(response.data.petitioner.village);
-        setResponderName(response.data.responder.name);
-        setResponderGender(response.data.responder.gender);
-        setResponderRelation(response.data.responder.relation);
-        setResponderDateOfBirth(response.data.responder.dateOfBirth);
-        setResponderAge(Number(response.data.responder.age));
-        setResponderCaseDetails(response.data.responder.caseDetails);
-        setResponderExtraName(response.data.responder.extraName);
-        setResponderEmail(response.data.responder.email);
-        setResponderOccupation(response.data.responder.occupation);
-        setResponderMobileNumber(Number(response.data.responder.MobileNumber));
-        setResponderPinCode(Number(response.data.responder.pinCode));
-        setResponderAddress(response.data.responder.address);
-        setResponderState(response.data.responder.state);
-        setResponderDistrict(response.data.responder.district);
-        setResponderTaluka(response.data.responder.taluka);
-        setResponderVillage(response.data.responder.village);
-        setCauseOfAction(response.data.causeOfAction);
-        setCauseOfActionDate(response.data.causeOfActionDate);
-        setImportantInformation(response.data.importantInformation);
-        setPrayer(response.data.prayer);
-        setValuation(Number(response.data.valuation));
-        setLocationState(response.data.location.state);
-        setLocationDistrict(response.data.location.district);
-        setLocationTaluka(response.data.location.taluka);
-        setLocationVillage(response.data.location.village);
-        setLegalAct(response.data.legalDetails.act);
-        setLegalSection(response.data.legalDetails.section);
-      }
-    } catch (error: any) {
-      console.error("Error sending data to the backend:", error);
-    }
-  };
-
-  useEffect(() => {
-    getbackenddata();
-  }, []);
-
   const sendDataToBackend = async (data: any) => {
     try {
-      const response: AxiosResponse<any> = await axios.post(
-        "https://your-backend-url.com/submitFormData",
+      console.log(data);
+      const response = await axios.post(
+        "http://localhost:4200/efiling",
         data
       );
       console.log("Data sent to the backend:", response.data);
@@ -151,6 +78,7 @@ const FinalForm = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("slicjk")
     e.preventDefault();
     const formData = {
       courtType: courtType,

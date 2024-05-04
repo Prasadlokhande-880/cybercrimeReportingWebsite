@@ -273,21 +273,22 @@ const FinalForm = () => {
     }
   };
 
-  const sendDataToBackend = async (data: any) => {
+  const sendDataToBackend = async (data:any) => {
     try {
-      const response: AxiosResponse<any> = await axiosInstance.post(
-        "/addCase",
-        data
-      );
-      console.log("Data sent to the backend:", response.data);
-    } catch (error: any) {
-      console.error("Error sending data to the backend:", error);
+       const response = await axios.post(
+          "http://localhost:4200/efiling",
+          data
+       );
+       console.log("Data sent to the backend:", response.data);
+    } catch (error) {
+       console.error("Error sending data to the backend:", error);
     }
-  };
+ };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
+      UserEmail:"",
       courtType: courtType,
       isScheduled: false,
       courtID: courtID,

@@ -1,1 +1,1 @@
-UserType
+getprofile

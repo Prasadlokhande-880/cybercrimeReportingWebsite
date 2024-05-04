@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const NormalSignup = require('./model/ModuleNormalUser');
 const InternSignup = require('./model/ModuleInternUser');
 const AdminSignup = require('./model/ModuleAdministration');
+const Case = require("./model/Moduleform");
+
 const cors = require('cors');
 
 const app = express();
@@ -130,6 +132,7 @@ app.get("/UserName", async (req, res) => {
 
 
 // this is the code for the code for the profile
+
 app.get("/ProfileUser", async (req, res) => {
     try {
         const ProfileUserData = await NormalUser.findOne({ name: userNameNormal });
@@ -143,3 +146,47 @@ app.get("/ProfileUser", async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+//this is the code for the code for the E-filing
+
+app.post("/efiling", async (req, res) => {
+    try {
+       const data = req.body;
+       data.UserEmail=userName;
+
+       const newUser = new Case(data);
+       await newUser.save();
+       res.status(200).send("Data received successfully");
+    } catch (error) {
+       console.log("There is an error in efiling:", error);
+       res.status(500).send("Internal server error");
+    }
+ });
+
+ // get all the data from the backend
+
+app.get("/getallefiling", async (req, res) => {
+    try {
+      console.log("getAllEfiling");
+      const allCases = await Case.find({UserEmail:userName});
+      res.status(200).json(allCases);
+    } catch (error) {
+      console.error("Error in getAllEfiling:", error);
+      res.status(500).send("Internal server error");
+    }
+  });
+
+
+// this is the for the giving the Profile information
+
+app.get("/profile", async (req, res) => {
+    try{
+        console.log("getProfile----");
+        const userinformation = await NormalSignup.findOne({UserEmail:userName});
+        console.log(userinformation);
+        res.status(200).json(allCases);
+    }
+    catch(error){
+        console.log("this is the error for the server:",error);
+    }
+})

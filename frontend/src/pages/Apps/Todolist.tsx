@@ -4,33 +4,92 @@ import { setPageTitle } from "../../store/themeConfigSlice";
 import { DataTable, DataTableSortStatus } from "mantine-datatable";
 import sortBy from "lodash/sortBy";
 import { axiosInstance } from "../../config";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
-type UserData = {
-  name: string;
-  causeOfActionDate: string;
-  respondername: string;
-  natureOfCase: string;
-  caseType: string;
-  mobileNumber: number;
-  id:string
-};
+interface CaseInterface extends Document {
+  _id:string;
+  courtType: string;
+  UserEmail: string;
+  isScheduled: boolean;
+  courtID: string;
+  caseDetails: {
+    caseDescription: string;
+    mainDistrict: string;
+    establishment: string;
+    natureOfCase: string;
+    reliefSought: string;
+    caseType: string;
+    plaintiff: string;
+    contactNumber: string;
+  };
+  petitioner: {
+    name: string;
+    gender: string;
+    relation: string;
+    dateOfBirth: Date;
+    age: number;
+    caseDetails: string;
+    extraName: string;
+    email: string;
+    occupation: string;
+    mobileNumber: string;
+    pinCode: string;
+    address: string;
+    state: string;
+    district: string;
+    taluka: string;
+    village: string;
+  };
+  responder: {
+    name: string;
+    gender: string;
+    relation: string;
+    dateOfBirth: Date;
+    age: number;
+    caseDetails: string;
+    extraName: string;
+    email: string;
+    occupation: string;
+    mobileNumber: string;
+    pinCode: string;
+    address: string;
+    state: string;
+    district: string;
+    taluka: string;
+    village: string;
+  };
+  causeOfAction: string;
+  causeOfActionDate: Date;
+  importantInformation: string;
+  prayer: string;
+  valuation: string;
+  location: {
+    state: string;
+    district: string;
+    taluka: string;
+    village: string;
+  };
+  legalDetails: string[];
+}
 
 const MultipleTables = () => {
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<CaseInterface[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("Fetching data...");
-        const response: AxiosResponse<UserData[]> = await axiosInstance.get("/userCasedetails");
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+ // Client-side code (React component using useEffect and Axios)
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      console.log("Fetching data...");
+      const response = await axios.get("http://localhost:4200/getallefiling");
+      setData(response.data);
+      console.log("Data fetched successfully:", response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  fetchData();
+}, []);
+
 
   async function editUser(id:string) {
     try {
@@ -43,10 +102,7 @@ const MultipleTables = () => {
       // Handle the error as needed
       window.location.href = '/finalForm';
     }
-
-
   }
-  
 
   return (
     <div>
@@ -59,34 +115,22 @@ const MultipleTables = () => {
             <thead>
               <tr>
                 <th>Petitioner Name</th>
-                <th>Cause of Action Date</th>
+                <th>Petitioner Gender</th>
+                <th>Petitioner Email</th>
+                <th>mobileNumber</th>
+                <th>isScheduled</th>
                 <th>Responder Name</th>
-                <th>Nature of Case</th>
-                <th>Case Type</th>
-                <th>Mobile Number</th>
-                <th className="!text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
             {data.map((contact, index) => (
   <tr key={index}>
-    <td>{contact.name}</td>
-    <td>{contact.causeOfActionDate}</td>
-    <td>{contact.respondername}</td>
-    <td>{contact.natureOfCase}</td>
-    <td>{contact.caseType}</td>
-    <td>{contact.mobileNumber}</td>
-    <td>
-      <div className="flex gap-4 items-center justify-center">
-      <button
-          type="button"
-          className="btn btn-sm btn-outline-primary"
-          onClick={() => {
-            editUser(contact._id);
-          }}
-        >Edit</button>
-      </div>
-    </td>
+    <td>{contact.petitioner.name}</td>
+    <td>{contact.petitioner.gender}</td>
+    <td>{contact.petitioner.email}</td>
+    <td>{contact.petitioner.mobileNumber}</td>
+    <td>{contact.isScheduled ? "Scheduled" : "not Scheduled"}</td>
+    <td>{contact.responder.name}</td>
   </tr>
 ))}
             </tbody>

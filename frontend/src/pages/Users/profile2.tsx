@@ -27,12 +27,11 @@ type YourData = {
 const Profile = () => {
 
     const [dataList, setDataList] = useState<YourData[]>([]);
-
-    useEffect(() => {
+useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axiosInstance.get('/userType');
-                const data: YourData[] = response.data;
+                const response = await axios.get('http://localhost:4200/profile');
+                const data = response.data; 
                 setDataList(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -298,7 +297,7 @@ const Profile = () => {
         state:""
     })
 
-    
+
 // Function to retrieve user data from the backend
 
 useEffect(()=>{
@@ -313,8 +312,8 @@ useEffect(()=>{
             console.error('Error fetching user data:', error);
         }
     };
-    
-    getUserDataFromBackend();    
+
+    getUserDataFromBackend();
 },[])
 
     return (
